@@ -57,6 +57,14 @@ export type Message = {
   created_at: string;
 };
 
+export type Subscriber = {
+  /** UUID — sert de nom de fichier dans le store : introuvable sans token. */
+  id: string;
+  /** Adresse normalisée (minuscules) — clé de dédoublonnage. */
+  email: string;
+  created_at: string;
+};
+
 /** Casquettes métier — une encre chacune sur le site public. */
 export type Hat = "archives" | "data" | "dev";
 

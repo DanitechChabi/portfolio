@@ -2,6 +2,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import { CrosshairCursor } from "@/components/ui/CrosshairCursor";
+import { NewsletterPopup } from "@/components/newsletter/NewsletterPopup";
 
 /** Layout du site public (l'admin a son propre chrome). */
 export const revalidate = 60;
@@ -14,6 +15,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
+      <NewsletterPopup />
     </div>
   );
 }

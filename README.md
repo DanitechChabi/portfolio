@@ -81,6 +81,7 @@ Le contenu vit en JSON dans le store :
 | `data/skills.json` | compétences (trois pôles) |
 | `data/experiences.json` | parcours professionnel |
 | `messages/{uuid}.json` | un fichier par message reçu, à nom aléatoire |
+| `newsletter/{uuid}.json` | un abonné à la newsletter, à nom aléatoire |
 | `media/{folder}/…` | images téléversées |
 
 Tant qu'un fichier n'a **jamais été écrit**, le site public sert le
@@ -148,6 +149,11 @@ mot de passe définis dans l'environnement.
 - **Parcours** — postes et stages : cote, période, type, casquettes,
   réalisations (une par ligne).
 - **Messages** — messages reçus via le formulaire de contact, lu/non lu.
+- **Newsletter** — abonnés à « Le Bordereau » collectés par le popup du site
+  public (s'ouvre après 20 s de lecture ou 55 % de page parcourue ; un refus
+  le calme 7 jours, une inscription le retire définitivement ; le lien
+  « Newsletter » du pied de page le rouvre à la demande). Export CSV pour
+  alimenter un outil d'envi (Resend Audiences, Buttondown…).
 
 > **Projets** : l'onglet n'existe pas dans l'admin — les fiches projets se
 > synchronisent toutes seules depuis GitHub (voir § 2). La curation se
@@ -180,9 +186,10 @@ src/
 │   │   └── (protected)/   # tableau de bord, articles, compétences,
 │   │                      #   parcours, messages, profil
 │   ├── api/contact/       # Route Handler : Resend + archivage Blob
+│   ├── api/newsletter/    # Route Handler : inscription « Le Bordereau »
 │   ├── layout.tsx         # polices, métadonnées globales
 │   └── template.tsx       # transition de page (fade + slide)
-├── components/            # home/ projects/ blog/ layout/ ui/ admin/
+├── components/            # home/ projects/ blog/ newsletter/ layout/ ui/ admin/
 ├── content/
 │   ├── projects.config.ts # curation GitHub : overrides, exclusions, phares
 │   └── parcours.ts        # formations (les expériences passent par le store)

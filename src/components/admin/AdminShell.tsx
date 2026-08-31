@@ -9,6 +9,7 @@ import {
   FileTextIcon,
   InboxIcon,
   LogoutIcon,
+  MailIcon,
   ParcoursIcon,
   SkillsIcon,
   UserIcon,
@@ -20,6 +21,7 @@ const NAV = [
   { href: "/admin/competences", label: "Compétences", icon: SkillsIcon },
   { href: "/admin/posts", label: "Articles", icon: FileTextIcon },
   { href: "/admin/messages", label: "Messages", icon: InboxIcon },
+  { href: "/admin/newsletter", label: "Newsletter", icon: MailIcon },
   { href: "/admin/profile", label: "Profil", icon: UserIcon },
 ];
 

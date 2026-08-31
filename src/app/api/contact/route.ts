@@ -9,8 +9,10 @@ const contactSchema = z.object({
   name: z.string().trim().min(2, "Nom trop court").max(120),
   email: z.email("Adresse email invalide").max(200),
   message: z.string().trim().min(10, "Message trop court").max(4000),
-  // Honeypot anti-spam : champ caché que les robots remplissent.
-  website: z.string().max(0).optional().or(z.literal("")),
+  // Honeypot anti-spam : champ caché que les robots remplissent. Il passe
+  // la validation (max généreux) pour recevoir un faux succès plus bas —
+  // le robot s'arrête là, sans savoir qu'il a été filtré.
+  website: z.string().max(500).optional().or(z.literal("")),
 });
 
 /* Limite simple en mémoire : 5 messages / minute / IP. */

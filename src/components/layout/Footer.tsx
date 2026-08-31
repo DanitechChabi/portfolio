@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getProfile } from "@/lib/data";
 import { GitHubIcon, LinkedInIcon, MailIcon } from "@/components/ui/icons";
+import { NewsletterFooterLink } from "@/components/newsletter/NewsletterFooterLink";
 
 export async function Footer() {
   const profile = await getProfile();
@@ -62,6 +63,7 @@ export async function Footer() {
               Ailleurs
             </p>
             <ul className="mt-4 space-y-2.5 text-sm">
+              <NewsletterFooterLink />
               <li>
                 <a
                   href={profile.linkedin_url}

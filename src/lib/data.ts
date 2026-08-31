@@ -1,11 +1,23 @@
-import { getMessages as getStoredMessages, readCollection, readJson } from "@/lib/store";
+import {
+  getMessages as getStoredMessages,
+  getSubscribers as getStoredSubscribers,
+  readCollection,
+  readJson,
+} from "@/lib/store";
 import {
   DEFAULT_EXPERIENCES,
   DEFAULT_POSTS,
   DEFAULT_PROFILE,
   DEFAULT_SKILLS,
 } from "@/lib/default-content";
-import type { Experience, Message, Post, Profile, Skill } from "@/types/content";
+import type {
+  Experience,
+  Message,
+  Post,
+  Profile,
+  Skill,
+  Subscriber,
+} from "@/types/content";
 
 /**
  * Couche d'accès au contenu (côté serveur).
@@ -76,4 +88,9 @@ export async function getMessages(): Promise<Message[]> {
 export async function getUnreadMessageCount(): Promise<number> {
   const messages = await getStoredMessages<Message>();
   return messages.filter((m) => !m.read).length;
+}
+
+/** Abonnés à la newsletter « Le Bordereau », du plus récent au plus ancien. */
+export async function getSubscribers(): Promise<Subscriber[]> {
+  return getStoredSubscribers<Subscriber>();
 }

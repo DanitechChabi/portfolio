@@ -12,6 +12,8 @@ import { BlobNotFoundError, del, head, list, put } from "@vercel/blob";
  *   messages/{uuid}.json   → un fichier PAR message (aucune course entre
  *                            deux envois simultanés du formulaire), à nom
  *                            aléatoire — ils contiennent nom et email.
+ *   newsletter/{uuid}.json → un fichier PAR abonné, à nom aléatoire —
+ *                            même raison : emails à nom imprévisible.
  *   media/{dossier}/…      → images (URL publiques)
  *
  * Vercel Blob ne propose plus de blobs privés : tout est public, MAIS le
@@ -133,6 +135,38 @@ export async function patchMessage(
 export async function deleteMessage(id: string): Promise<void> {
   requireToken();
   await del(`messages/${id}.json`);
+}
+
+/* ------------------------------------------------------------------ */
+/* Newsletter (un fichier par abonné, nommé par UUID)                  */
+/* ------------------------------------------------------------------ */
+
+export async function putSubscriber(
+  subscriber: { id: string } & Record<string, unknown>,
+): Promise<void> {
+  await writeJson(`newsletter/${subscriber.id}.json`, subscriber);
+}
+
+/** Tous les abonnés, du plus récent au plus ancien ([] si store vide). */
+export async function getSubscribers<T extends { created_at: string }>(): Promise<
+  T[]
+> {
+  if (!isConfigured()) return [];
+  try {
+    const { blobs } = await list({ prefix: "newsletter/" });
+    const items = await Promise.all(blobs.map((b) => readUrl(b.url)));
+    return items
+      .filter((s): s is T => s !== null)
+      .sort((a, b) => b.created_at.localeCompare(a.created_at));
+  } catch (e) {
+    console.error("[store] Listing des abonnés impossible :", e);
+    return [];
+  }
+}
+
+export async function deleteSubscriber(id: string): Promise<void> {
+  requireToken();
+  await del(`newsletter/${id}.json`);
 }
 
 /* ------------------------------------------------------------------ */

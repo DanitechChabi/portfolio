@@ -12,6 +12,7 @@ import {
 } from "@/lib/auth";
 import {
   deleteMessage,
+  deleteSubscriber,
   patchMessage,
   putImage,
   readCollection,
@@ -336,6 +337,20 @@ export async function removeMessage(id: string): Promise<ActionResult> {
   await requireAdmin();
   try {
     await deleteMessage(id);
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Suppression impossible." };
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Newsletter                                                          */
+/* ------------------------------------------------------------------ */
+
+export async function removeSubscriber(id: string): Promise<ActionResult> {
+  await requireAdmin();
+  try {
+    await deleteSubscriber(id);
     return { ok: true };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : "Suppression impossible." };
