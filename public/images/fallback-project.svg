@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" fill="none">
+  <rect width="1200" height="750" fill="#15151D"/>
+  <!-- trame discrète -->
+  <g stroke="#22222E" stroke-width="1">
+    <path d="M0 150H1200M0 300H1200M0 450H1200M0 600H1200"/>
+    <path d="M200 0V750M400 0V750M600 0V750M800 0V750M1000 0V750"/>
+  </g>
+  <rect x="0.5" y="0.5" width="1199" height="749" stroke="#26262F"/>
+  <!-- document stylisé -->
+  <g transform="translate(520 235)">
+    <rect x="0" y="0" width="160" height="200" rx="6" fill="#1B1B26" stroke="#D9A441" stroke-opacity="0.55" stroke-width="2"/>
+    <rect x="26" y="30" width="108" height="10" rx="5" fill="#D9A441" fill-opacity="0.85"/>
+    <rect x="26" y="58" width="108" height="6" rx="3" fill="#ECE7DD" fill-opacity="0.35"/>
+    <rect x="26" y="76" width="88" height="6" rx="3" fill="#ECE7DD" fill-opacity="0.35"/>
+    <rect x="26" y="94" width="98" height="6" rx="3" fill="#ECE7DD" fill-opacity="0.35"/>
+    <rect x="26" y="112" width="72" height="6" rx="3" fill="#ECE7DD" fill-opacity="0.35"/>
+    <rect x="26" y="146" width="52" height="18" rx="9" fill="#D9A441" fill-opacity="0.22"/>
+    <rect x="86" y="146" width="48" height="18" rx="9" stroke="#D9A441" stroke-opacity="0.4"/>
+  </g>
+  <text x="600" y="540" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" fill="#ECE7DD" fill-opacity="0.85">Image de couverture à venir</text>
+  <text x="600" y="576" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" letter-spacing="4" fill="#D9A441" fill-opacity="0.8">À AJOUTER DEPUIS L'ADMIN</text>
+</svg>
