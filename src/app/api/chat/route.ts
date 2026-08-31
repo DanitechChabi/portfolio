@@ -29,8 +29,14 @@ const REGISTRE_INDISPONIBLE =
 
 /** Tours de conversation conservés en contexte (au-delà : troncature). */
 const MAX_HISTORY = 8;
-/** Plafond de sortie, en tokens — garde le coût borné par réponse. */
-const MAX_OUTPUT_TOKENS = 400;
+/**
+ * Plafond de sortie, en tokens. Large : le modèle gratuit par défaut
+ * (Ling) réfléchit longuement dans un champ séparé que la route ne
+ * transmet pas — il faut lui laisser la place de finir sa réflexion
+ * avant d'écrire la réponse visible. Le texte transmis reste court,
+ * borné par les règles du prompt (2 à 5 phrases).
+ */
+const MAX_OUTPUT_TOKENS = 2000;
 
 const chatSchema = z
   .object({
@@ -145,7 +151,8 @@ export async function POST(request: Request) {
         Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
         "Content-Type": "application/json",
         "HTTP-Referer": SITE_URL,
-        "X-Title": "Le Registre — L'Archiviste",
+        // Valeur ASCII : un en-tête HTTP n'accepte pas les tirets cadratins.
+        "X-Title": "Le Registre - L'Archiviste",
       },
       body: JSON.stringify({
         model: chatModel(),
@@ -154,7 +161,7 @@ export async function POST(request: Request) {
         temperature: 0.3,
         messages: [{ role: "system", content: context }, ...history],
       }),
-      signal: AbortSignal.timeout(60_000),
+      signal: AbortSignal.timeout(90_000),
     });
   } catch (e) {
     console.error("[chat] OpenRouter injoignable :", e instanceof Error ? e.message : e);
