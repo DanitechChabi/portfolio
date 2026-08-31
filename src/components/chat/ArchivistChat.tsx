@@ -45,17 +45,28 @@ type Msg = {
 /*  Rendu du texte — markdown léger du modèle (gras, listes)           */
 /* ------------------------------------------------------------------ */
 
-/** Gras `**ainsi**` → <strong> ; le reste tel quel. */
+/** Gras `**ainsi**` et italique `*ainsi*` → <strong>/<em> ; le reste tel quel. */
 function inline(text: string) {
-  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
-    part.startsWith("**") && part.endsWith("**") && part.length > 4 ? (
-      <strong key={i} className="font-semibold text-ink">
-        {part.slice(2, -2)}
-      </strong>
-    ) : (
-      <span key={i}>{part}</span>
-    ),
-  );
+  const out: React.ReactNode[] = [];
+  let key = 0;
+  for (const chunk of text.split(/(\*\*[^*]+\*\*)/g)) {
+    if (chunk.startsWith("**") && chunk.endsWith("**") && chunk.length > 4) {
+      out.push(
+        <strong key={key++} className="font-semibold text-ink">
+          {chunk.slice(2, -2)}
+        </strong>,
+      );
+      continue;
+    }
+    for (const part of chunk.split(/(\*[^*]+\*)/g)) {
+      if (part.startsWith("*") && part.endsWith("*") && part.length > 2) {
+        out.push(<em key={key++}>{part.slice(1, -1)}</em>);
+      } else if (part) {
+        out.push(part);
+      }
+    }
+  }
+  return out;
 }
 
 /** Paragraphes et listes à puces — assez pour le « markdown léger » du prompt. */
