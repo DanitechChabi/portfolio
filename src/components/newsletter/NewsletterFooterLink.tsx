@@ -16,7 +16,7 @@ export function NewsletterFooterLink() {
         onClick={() =>
           window.dispatchEvent(new CustomEvent(NEWSLETTER_OPEN_EVENT))
         }
-        className="inline-flex items-center gap-2.5 text-onink-dim transition-colors hover:text-onink"
+        className="inline-flex items-center gap-2.5 py-1 text-onink-dim transition-colors hover:text-onink"
       >
         <MailIcon className="h-4 w-4" />
         Newsletter

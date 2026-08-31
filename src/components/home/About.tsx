@@ -26,7 +26,7 @@ export async function About() {
                 {/* filigrane monogramme — dérive plus lentement */}
                 <Parallax amount={10}>
                   <span
-                    className="watermark absolute -right-6 -top-12 select-none font-serif text-[13rem] italic leading-none"
+                    className="watermark absolute -right-3 -top-9 select-none font-serif text-[9rem] italic leading-none sm:-right-6 sm:-top-12 sm:text-[11rem] lg:text-[13rem]"
                     aria-hidden
                   >
                     D.

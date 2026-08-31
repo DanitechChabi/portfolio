@@ -36,7 +36,7 @@ export async function Footer() {
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-onink-faint">
               Index du fonds
             </p>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <ul className="mt-4 space-y-3.5 text-sm">
               {[
                 { href: "/#apropos", label: "À propos" },
                 { href: "/#competences", label: "Compétences" },
@@ -48,7 +48,7 @@ export async function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-onink-dim transition-colors hover:text-onink"
+                    className="py-1 text-onink-dim transition-colors hover:text-onink"
                   >
                     {link.label}
                   </Link>
@@ -62,14 +62,14 @@ export async function Footer() {
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-onink-faint">
               Ailleurs
             </p>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <ul className="mt-4 space-y-3.5 text-sm">
               <NewsletterFooterLink />
               <li>
                 <a
                   href={profile.linkedin_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 text-onink-dim transition-colors hover:text-onink"
+                  className="inline-flex items-center gap-2.5 py-1 text-onink-dim transition-colors hover:text-onink"
                 >
                   <LinkedInIcon className="h-4 w-4" />
                   LinkedIn
@@ -80,7 +80,7 @@ export async function Footer() {
                   href={profile.github_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 text-onink-dim transition-colors hover:text-onink"
+                  className="inline-flex items-center gap-2.5 py-1 text-onink-dim transition-colors hover:text-onink"
                 >
                   <GitHubIcon className="h-4 w-4" />
                   GitHub
@@ -90,7 +90,7 @@ export async function Footer() {
                 <li>
                   <a
                     href={`mailto:${profile.email}`}
-                    className="inline-flex items-center gap-2.5 text-onink-dim transition-colors hover:text-onink"
+                    className="inline-flex items-center gap-2.5 py-1 text-onink-dim transition-colors hover:text-onink"
                   >
                     <MailIcon className="h-4 w-4" />
                     {profile.email}

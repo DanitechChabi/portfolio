@@ -64,8 +64,10 @@ function writeMemory(status: Memory["status"]): void {
 
 type Status = "idle" | "sending" | "success" | "error";
 
+/* text-base (16px) obligatoire : sous cette taille, iOS Safari zoome
+   toute la page au focus du champ. */
 const FIELD =
-  "w-full border border-ink/30 bg-bg px-4 py-3 text-sm text-ink placeholder:text-ink-faint/70 transition-all duration-200 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25";
+  "w-full border border-ink/30 bg-bg px-4 py-3 text-base text-ink placeholder:text-ink-faint/70 transition-all duration-200 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25";
 
 /* ------------------------------------------------------------------ */
 /*  Mise en scène                                                      */

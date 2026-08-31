@@ -101,7 +101,7 @@ export async function Skills() {
           />
         </Reveal>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {byPole.map(({ pole, items }, i) => (
             <Reveal key={pole.key} delay={0.08 * i}>
               <article className="h-full border border-ink/25 bg-surface shadow-card">

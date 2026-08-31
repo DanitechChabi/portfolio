@@ -316,7 +316,7 @@ export function ArchivistChat() {
         aria-controls={panelId}
         whileHover={reduce ? undefined : { scale: 1.06, rotate: -11 }}
         whileTap={{ scale: 0.94 }}
-        className="fixed bottom-5 right-5 z-40 grid size-14 -rotate-[8deg] cursor-pointer place-items-center rounded-full border-[2.5px] border-accent/90 bg-surface shadow-card transition-colors duration-300 hover:border-accent hover:bg-bg"
+        className="fixed bottom-[calc(1.25rem+env(safe-area-inset-bottom))] right-5 z-40 grid size-14 -rotate-[8deg] cursor-pointer place-items-center rounded-full border-[2.5px] border-accent/90 bg-surface shadow-card transition-colors duration-300 hover:border-accent hover:bg-bg"
       >
         <span aria-hidden className="pointer-events-none absolute inset-[3.5px] rounded-full border border-accent/55" />
         <span aria-hidden className="absolute left-[7px] top-1/2 size-[4.5px] -translate-y-1/2 rotate-45 bg-accent/80" />
@@ -343,7 +343,7 @@ export function ArchivistChat() {
             }}
             transition={{ type: "spring", stiffness: 320, damping: 26, mass: 0.9 }}
             style={{ transformOrigin: "bottom right" }}
-            className="fixed bottom-[5.5rem] right-5 z-40 flex max-h-[min(70dvh,32rem)] w-[min(23.75rem,calc(100vw-2.5rem))] flex-col border border-ink/25 bg-surface shadow-[0_36px_90px_-28px_rgba(18,14,8,0.55)]"
+            className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom))] right-5 z-40 flex max-h-[min(70dvh,32rem)] w-[min(23.75rem,calc(100vw-2.5rem))] flex-col border border-ink/25 bg-surface shadow-[0_36px_90px_-28px_rgba(18,14,8,0.55)]"
           >
             {/* En-tête du bordereau */}
             <header className="border-b border-dashed border-ink/35 px-4 pb-3 pt-3.5">
@@ -367,7 +367,7 @@ export function ArchivistChat() {
                   type="button"
                   onClick={() => setOpen(false)}
                   aria-label="Fermer la salle de lecture"
-                  className="cursor-pointer border border-ink/25 p-1.5 text-ink-dim transition-colors hover:border-accent/60 hover:text-accent"
+                  className="cursor-pointer border border-ink/25 p-2 text-ink-dim transition-colors hover:border-accent/60 hover:text-accent"
                 >
                   <CloseIcon className="size-3.5" />
                 </button>
@@ -451,12 +451,12 @@ export function ArchivistChat() {
                   maxLength={MAX_QUESTION}
                   placeholder="Poser une question au fonds…"
                   aria-label="Votre demande à l'Archiviste"
-                  className="min-w-0 flex-1 border border-ink/30 bg-bg px-3 py-2 font-mono text-[13px] text-ink transition-colors placeholder:text-ink-faint/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25"
+                  className="min-w-0 flex-1 border border-ink/30 bg-bg px-3 py-2 font-mono text-base text-ink transition-colors placeholder:text-ink-faint/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25"
                 />
                 <button
                   type="submit"
                   disabled={streaming || !input.trim()}
-                  className="shrink-0 cursor-pointer border border-accent/60 bg-accent/10 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent-deep transition-colors hover:bg-accent hover:text-surface disabled:cursor-not-allowed disabled:opacity-40"
+                  className="shrink-0 cursor-pointer border border-accent/60 bg-accent/10 px-3 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-accent-deep transition-colors hover:bg-accent hover:text-surface disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   Verser
                 </button>

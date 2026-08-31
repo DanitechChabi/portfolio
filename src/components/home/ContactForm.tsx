@@ -7,8 +7,10 @@ import { CheckIcon } from "@/components/ui/icons";
 
 type Status = "idle" | "sending" | "success" | "error";
 
+/* text-base (16px) obligatoire : sous cette taille, iOS Safari zoome
+   toute la page au focus du champ. */
 const FIELD =
-  "w-full border border-ink/30 bg-bg px-4 py-3 text-sm text-ink placeholder:text-ink-faint/70 transition-colors focus:border-accent focus:outline-none";
+  "w-full border border-ink/30 bg-bg px-4 py-3 text-base text-ink placeholder:text-ink-faint/70 transition-colors focus:border-accent focus:outline-none";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");

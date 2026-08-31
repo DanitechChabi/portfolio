@@ -194,7 +194,7 @@ export function PostForm({ post }: PostFormProps) {
             onChange={(e) => setContent(e.target.value)}
             rows={16}
             placeholder={"## Un sous-titre\n\nLe texte de l'article…"}
-            className="w-full rounded-xl border border-line bg-bg/70 px-4 py-3 font-mono text-sm leading-relaxed text-ink placeholder:text-ink-faint/60 transition-colors focus:border-accent/60 focus:outline-none"
+            className="w-full rounded-xl border border-line bg-bg/70 px-4 py-3 font-mono text-base leading-relaxed text-ink placeholder:text-ink-faint/60 transition-colors focus:border-accent/60 focus:outline-none"
           />
         ) : (
           <div className="min-h-64 rounded-xl border border-line bg-bg/50 p-6">

@@ -135,7 +135,7 @@ export function LivePreview({ url, title, coverImage }: LivePreviewProps) {
           <button
             type="button"
             onClick={() => setFullscreen(true)}
-            className="flex h-8 w-8 items-center justify-center border border-transparent text-ink-dim transition-colors hover:border-line hover:bg-surface hover:text-accent-deep"
+            className="flex h-10 w-10 items-center justify-center border border-transparent text-ink-dim transition-colors hover:border-line hover:bg-surface hover:text-accent-deep"
             aria-label="Agrandir l'aperçu en plein écran"
             title="Plein écran"
           >
@@ -146,7 +146,7 @@ export function LivePreview({ url, title, coverImage }: LivePreviewProps) {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex h-8 w-8 items-center justify-center border border-transparent text-ink-dim transition-colors hover:border-line hover:bg-surface hover:text-accent-deep"
+          className="flex h-10 w-10 items-center justify-center border border-transparent text-ink-dim transition-colors hover:border-line hover:bg-surface hover:text-accent-deep"
           aria-label={`Ouvrir ${title} dans un nouvel onglet`}
           title="Ouvrir dans un nouvel onglet"
         >
@@ -161,7 +161,7 @@ export function LivePreview({ url, title, coverImage }: LivePreviewProps) {
       {/* Fenêtre navigateur */}
       <div className="overflow-hidden border border-ink/25 bg-surface shadow-card">
         {toolbar()}
-        <div className="relative aspect-[16/10] w-full bg-bg-deep md:aspect-video">
+        <div className="relative aspect-[4/3] w-full bg-bg-deep sm:aspect-[16/10] md:aspect-video">
           {visible && iframe()}
 
           {/* Voile de chargement */}
@@ -238,7 +238,7 @@ export function LivePreview({ url, title, coverImage }: LivePreviewProps) {
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-8 w-8 items-center justify-center border border-transparent text-ink-dim transition-colors hover:border-line hover:bg-surface hover:text-accent-deep"
+                    className="flex h-10 w-10 items-center justify-center border border-transparent text-ink-dim transition-colors hover:border-line hover:bg-surface hover:text-accent-deep"
                     aria-label={`Ouvrir ${title} dans un nouvel onglet`}
                     title="Ouvrir dans un nouvel onglet"
                   >
@@ -247,7 +247,7 @@ export function LivePreview({ url, title, coverImage }: LivePreviewProps) {
                   <button
                     type="button"
                     onClick={() => setFullscreen(false)}
-                    className="flex h-8 w-8 items-center justify-center border border-transparent text-ink-dim transition-colors hover:border-line hover:bg-surface hover:text-accent-deep"
+                    className="flex h-10 w-10 items-center justify-center border border-transparent text-ink-dim transition-colors hover:border-line hover:bg-surface hover:text-accent-deep"
                     aria-label="Fermer le plein écran"
                     title="Fermer (Échap)"
                   >

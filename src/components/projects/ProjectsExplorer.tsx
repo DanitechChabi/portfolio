@@ -70,7 +70,7 @@ export function ProjectsExplorer({ projects }: { projects: GitHubProject[] }) {
                 type="button"
                 onClick={() => setFilter(key)}
                 aria-pressed={isActive}
-                className={`tab-folder px-4 pb-2.5 pt-2 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-200 ${
+                className={`tab-folder px-4 pb-3 pt-2.5 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-200 ${
                   isActive
                     ? "bg-ink text-onink"
                     : "bg-surface-2 text-ink-dim hover:bg-line/70 hover:text-ink"
@@ -96,7 +96,7 @@ export function ProjectsExplorer({ projects }: { projects: GitHubProject[] }) {
               type="button"
               onClick={() => setView(mode)}
               aria-pressed={view === mode}
-              className={`px-4 py-2 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-200 ${
+              className={`px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-200 ${
                 view === mode ? "bg-ink text-onink" : "bg-surface text-ink-dim hover:text-ink"
               }`}
             >

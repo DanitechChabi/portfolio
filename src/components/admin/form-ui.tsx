@@ -8,8 +8,10 @@ import type {
 
 /** Primitives de formulaire partagées par l'interface admin. */
 
+/* text-base (16px) : sous cette taille, iOS Safari zoome toute la page
+   au focus du champ. */
 export const inputClass =
-  "w-full rounded-xl border border-line bg-bg/70 px-4 py-2.5 text-sm text-ink placeholder:text-ink-faint/60 transition-colors focus:border-accent/60 focus:outline-none disabled:opacity-50";
+  "w-full rounded-xl border border-line bg-bg/70 px-4 py-2.5 text-base text-ink placeholder:text-ink-faint/60 transition-colors focus:border-accent/60 focus:outline-none disabled:opacity-50";
 
 export function Field({
   label,
