@@ -25,7 +25,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: post.title,
       description: post.excerpt,
       publishedTime: post.published_at ?? post.created_at,
-      images: post.cover_image_url ? [{ url: post.cover_image_url }] : undefined,
+      // Pas d'images ici : la fiche de partage est générée par
+      // opengraph-image.tsx (cadre « Le Registre », titre de l'article).
     },
   };
 }

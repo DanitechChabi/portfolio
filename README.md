@@ -150,10 +150,13 @@ mot de passe définis dans l'environnement.
   réalisations (une par ligne).
 - **Messages** — messages reçus via le formulaire de contact, lu/non lu.
 - **Newsletter** — abonnés à « Le Bordereau » collectés par le popup du site
-  public (s'ouvre après 20 s de lecture ou 55 % de page parcourue ; un refus
-  le calme 7 jours, une inscription le retire définitivement ; le lien
-  « Newsletter » du pied de page le rouvre à la demande). Export CSV pour
-  alimenter un outil d'envi (Resend Audiences, Buttondown…).
+  public (s'ouvre après 8 s de lecture, 30 % de page parcourue ou une
+  intention de sortie — le curseur qui fuit vers le haut de la fenêtre ;
+  un refus le calme 7 jours, une inscription le retire définitivement ;
+  le lien « Newsletter » du pied de page le rouvre à la demande). À
+  l'inscription, le tampon claque : onde d'impact, éclaboussures d'encre
+  et secousse du papier. Export CSV pour alimenter un outil d'envoi
+  (Resend Audiences, Buttondown…).
 
 > **Projets** : l'onglet n'existe pas dans l'admin — les fiches projets se
 > synchronisent toutes seules depuis GitHub (voir § 2). La curation se
@@ -184,11 +187,17 @@ src/
 │   ├── admin/             # interface d'administration (identifiant/mdp)
 │   │   ├── login/         # connexion (identifiant + mot de passe)
 │   │   └── (protected)/   # tableau de bord, articles, compétences,
-│   │                      #   parcours, messages, profil
+│   │                      #   parcours, messages, newsletter, profil
 │   ├── api/contact/       # Route Handler : Resend + archivage Blob
 │   ├── api/newsletter/    # Route Handler : inscription « Le Bordereau »
+│   ├── opengraph-image.tsx   # fiche de partage 1200×630 (accueil, repli
+│   │                          # global) — voir src/og/
 │   ├── layout.tsx         # polices, métadonnées globales
 │   └── template.tsx       # transition de page (fade + slide)
+├── og/                    # images OpenGraph : cadre « Le Registre »,
+│   ├── frame.tsx          #   polices statiques TTF (Satori), sceau,
+│   └── fonts/             #   cotes — chaque route peut avoir sa fiche
+│                          #   via un fichier opengraph-image.tsx local
 ├── components/            # home/ projects/ blog/ newsletter/ layout/ ui/ admin/
 ├── content/
 │   ├── projects.config.ts # curation GitHub : overrides, exclusions, phares
@@ -203,6 +212,15 @@ src/
 │   └── chart-palette.ts   # couleurs des graphiques (langages, séries)
 └── types/                 # types partagés
 ```
+
+**Aperçu au partage des liens** : WhatsApp, LinkedIn, X et Facebook
+lisent `og:image` — chaque page servait déjà `og:title`/`og:description`,
+elles servent désormais une fiche 1200×630 générée par `next/og`
+(Satori + resvg). Accueil et blog sont prérendus au build ;
+articles et fiches projet sont générés à la demande (ISR, même rythme que
+la page). Les polices TTF statiques vivent dans `src/og/fonts/` (Satori
+n'accepte ni polices variables ni variables CSS) et sont tracées dans le
+build par le bundler.
 
 ## 9. Direction artistique — « Le Registre »
 
