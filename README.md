@@ -122,7 +122,41 @@ Chaque message envoyé via le formulaire part par email **et** est
 archivé dans le store (`messages/`) — consultable dans l'admin même si
 l'email échoue.
 
-## 5. Variables d'environnement
+## 5. L'Archiviste — assistant conversationnel du site public
+
+Un chat incarné par « L'Archiviste », le commis qui conserve le registre :
+il répond aux visiteurs (recruteurs, clients) sur le parcours, les
+compétences, les projets et les articles — **en ne s'appuyant que sur le
+contenu réel du site**, jamais inventé.
+
+1. Créer un compte sur [openrouter.ai](https://openrouter.ai), puis une
+   **API Key** → `OPENROUTER_API_KEY`.
+2. Renseigner la variable dans `.env.local` (et côté Vercel en production).
+   Clé serveur uniquement — jamais de préfixe `NEXT_PUBLIC_`.
+3. Redéployer : le sceau vermillon « A. » apparaît en bas à droite des
+   pages publiques. Sans la clé, le widget n'est pas dans les pages et la
+   route répond que la salle de lecture est fermée.
+
+**Comment ça marche.** Le serveur reconstitue toutes les dix minutes un
+« FONDS » — profil, compétences, parcours, projets GitHub, articles — à
+partir des mêmes sources que les pages (`src/lib/chat.ts`). Le modèle le
+reçoit avec des règles strictes : tenir le ton de l'office, ne répondre
+que du fonds, avouer ce qui n'y figure pas, rediriger les demandes
+concrètes vers le formulaire de contact. Les réponses arrivent en flux
+(SSE) sous un curseur d'encre ; la conversation ne survit pas au
+rafraîchissement — rien n'est stocké, seules les erreurs techniques sont
+journalisées, jamais le contenu.
+
+**Garde-fous** : question plafonnée à 800 caractères, historique tronqué
+à 8 tours côté serveur, sortie plafonnée à 400 tokens, 5 messages/min/IP
+et 50 consultations/jour/navigateur (cookie signé HMAC), honeypot
+anti-robots, repli in-character si le fournisseur est en panne.
+
+**Modèle** : `z-ai/glm-5.3-flash` par défaut (~$0,0004 la réponse, plafond
+absolu ≈ $0,62/mois au quota plein). Bascule via `AI_CHAT_MODEL` sans
+redéploiement ; coupure rapide via `AI_CHAT_ENABLED=false`.
+
+## 6. Variables d'environnement
 
 Voir `.env.local.example`. En production, les renseigner dans **Vercel →
 Settings → Environment Variables** :
@@ -137,8 +171,11 @@ Settings → Environment Variables** :
 | `CONTACT_EMAIL` | Adresse qui reçoit les messages |
 | `NEXT_PUBLIC_SITE_URL` | URL publique (SEO, emails) |
 | `GITHUB_TOKEN` | *(optionnel)* plafond API GitHub pour les projets |
+| `OPENROUTER_API_KEY` | Clé OpenRouter du chat « L'Archiviste » (§ 5) |
+| `AI_CHAT_MODEL` | *(optionnel)* modèle du chat — défaut `z-ai/glm-5.3-flash` |
+| `AI_CHAT_ENABLED` | *(optionnel)* `false` coupe le chat sans redéploiement |
 
-## 6. Utiliser l'interface admin
+## 7. Utiliser l'interface admin
 
 Rendez-vous sur **`/admin`** et connecte-toi avec l'identifiant et le
 mot de passe définis dans l'environnement.
@@ -165,7 +202,7 @@ mot de passe définis dans l'environnement.
 Les images sont téléversées dans Vercel Blob sous `media/` (accès public)
 via le bouton de téléversement des formulaires.
 
-## 7. Déploiement sur Vercel
+## 8. Déploiement sur Vercel
 
 1. Pousser le repo sur GitHub (`git init && git add -A && git commit -m
    "Portfolio" && git remote add origin … && git push -u origin main`).
@@ -173,7 +210,7 @@ via le bouton de téléversement des formulaires.
 3. Créer la base **Blob** (§ 3) et coller sa token dans les variables.
 4. Déployer. Le domaine `danielchabi.vercel.app` s'active automatiquement.
 
-## 8. Structure du projet
+## 9. Structure du projet
 
 ```
 src/
@@ -190,6 +227,8 @@ src/
 │   │                      #   parcours, messages, newsletter, profil
 │   ├── api/contact/       # Route Handler : Resend + archivage Blob
 │   ├── api/newsletter/    # Route Handler : inscription « Le Bordereau »
+│   ├── api/chat/          # Route Handler : streaming SSE → OpenRouter
+│   │                      #   (limites minute/jour, honeypot, replis)
 │   ├── opengraph-image.tsx   # fiche de partage 1200×630 (accueil, repli
 │   │                          # global) — voir src/og/
 │   ├── layout.tsx         # polices, métadonnées globales
@@ -198,7 +237,8 @@ src/
 │   ├── frame.tsx          #   polices statiques TTF (Satori), sceau,
 │   └── fonts/             #   cotes — chaque route peut avoir sa fiche
 │                          #   via un fichier opengraph-image.tsx local
-├── components/            # home/ projects/ blog/ newsletter/ layout/ ui/ admin/
+├── components/            # home/ projects/ blog/ newsletter/ chat/ layout/ ui/ admin/
+│   └── chat/              #   ArchivistChat : sceau-bouton + salle de lecture
 ├── content/
 │   ├── projects.config.ts # curation GitHub : overrides, exclusions, phares
 │   └── parcours.ts        # formations (les expériences passent par le store)
@@ -207,6 +247,8 @@ src/
 │   ├── admin-actions.ts   # server actions : mutations de l'admin
 │   ├── auth.ts            # sessions signées HMAC, vérification identifiants
 │   ├── data.ts            # lectures publiques (store → replis par défaut)
+│   ├── chat.ts            # chat : règles + FONDS reconstruit (TTL 10 min)
+│   ├── chat-quota.ts      # chat : quota journalier (cookie signé HMAC)
 │   ├── default-content.ts # contenu par défaut (point de départ du store)
 │   ├── github.ts          # lecture des dépôts GitHub (cache 1 h)
 │   └── chart-palette.ts   # couleurs des graphiques (langages, séries)
@@ -222,7 +264,7 @@ la page). Les polices TTF statiques vivent dans `src/og/fonts/` (Satori
 n'accepte ni polices variables ni variables CSS) et sont tracées dans le
 build par le bundler.
 
-## 9. Direction artistique — « Le Registre »
+## 10. Direction artistique — « Le Registre »
 
 Papier ivoire (`#f2ede0`), encre profonde (`#211c13`), vermillon tampon
 (`#c0391b`) ; une encre par casquette : **vermillon = archiviste**,
@@ -241,7 +283,7 @@ npm run palette:check   # valide src/lib/chart-palette.ts (six contrôles)
 
 À relancer après toute retouche de ces valeurs.
 
-## 10. Commandes
+## 11. Commandes
 
 ```bash
 npm run dev     # développement (Turbopack)
