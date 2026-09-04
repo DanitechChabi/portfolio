@@ -61,9 +61,9 @@ export const metadata: Metadata = {
     description: "GED, archivage numérique, dématérialisation, développement web et analyse de données.",
   },
   robots: { index: true, follow: true },
-  /* Vérification Google Search Console (propriété danielchabi.vercel.app). */
+  /* Vérification Google Search Console (propriété « préfixe d'URL » danielchabi.vercel.app). */
   verification: {
-    google: "FicIrvfTDhIT37dmNeShPm6oX61Rt-HEUb3dcaMDyNg",
+    google: "JB384sCmx3-ZWLpeaxKLw9WfF3hq2m5HieZwoRCbNV0",
   },
 };
 
