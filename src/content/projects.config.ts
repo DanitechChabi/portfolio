@@ -51,7 +51,7 @@ export const GITHUB_USERNAME = "DanitechChabi";
 export const REVALIDATE_SECONDS = 3600;
 
 /** Dépôts à ne jamais afficher. */
-export const EXCLUDED_REPOS: string[] = [];
+export const EXCLUDED_REPOS: string[] = ["DanitechChabi"];
 
 /** Dépôts sans description à afficher malgré tout. */
 export const INCLUDE_NO_DESCRIPTION: string[] = [];
