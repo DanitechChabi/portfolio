@@ -5,12 +5,18 @@ import { Experiences } from "@/components/home/Experiences";
 import { ProjectsSection } from "@/components/home/ProjectsSection";
 import { ContactSection } from "@/components/home/ContactSection";
 import { IndexRail } from "@/components/home/IndexRail";
+import type { Metadata } from "next";
 import { Marquee } from "@/components/ui/Marquee";
 import { getProfile } from "@/lib/data";
 import { SITE_URL } from "@/lib/site";
 
 /** Page d'accueil : Hero, À propos, Compétences, Expériences, Projets, Contact. */
 export const revalidate = 60;
+
+/** URL canonique — les variantes de l'adresse (?utm=…) renvoient ici. */
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 /** Le cycle de l'information — la bande de liaison entre les casquettes. */
 const CYCLE = [
@@ -32,6 +38,8 @@ export default async function HomePage() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: profile.name,
+    /* Variantes du nom + pseudonyme — relie l'entité au handle GitHub. */
+    alternateName: ["Daniel Chabi Bouko", "DanitechChabi"],
     jobTitle: profile.title,
     description: profile.bio,
     address: {

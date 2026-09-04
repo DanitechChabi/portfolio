@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Réflexions d'un archiviste 2.0 : GED, dématérialisation, archives numériques, développement web et analyse de données.",
+  alternates: { canonical: "/blog" },
 };
 
 export default async function BlogPage() {

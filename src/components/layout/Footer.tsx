@@ -68,7 +68,7 @@ export async function Footer() {
                 <a
                   href={profile.linkedin_url}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer me"
                   className="inline-flex items-center gap-2.5 py-1 text-onink-dim transition-colors hover:text-onink"
                 >
                   <LinkedInIcon className="h-4 w-4" />
@@ -79,7 +79,7 @@ export async function Footer() {
                 <a
                   href={profile.github_url}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer me"
                   className="inline-flex items-center gap-2.5 py-1 text-onink-dim transition-colors hover:text-onink"
                 >
                   <GitHubIcon className="h-4 w-4" />

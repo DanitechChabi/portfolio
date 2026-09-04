@@ -61,7 +61,7 @@ export const FEATURED_ORDER: string[] = [
   "DocuFlow-Landing",
   "DocuFlow",
   "kale",
-  "monreseau-prdc",
+  "monreseau",
 ];
 
 export const REPO_OVERRIDES: Record<string, ProjectOverride> = {
@@ -107,13 +107,27 @@ export const REPO_OVERRIDES: Record<string, ProjectOverride> = {
       "Arborescences de classement paramétrables",
     ],
   },
+  dino3D: {
+    description: "Jeu 3D dans le navigateur — démo en ligne.",
+  },
   kale: {
+    description:
+      "Kalé — la voix de ta communauté : plateforme communautaire en TypeScript.",
     liveUrl: "https://danitechchabi.github.io/kale/",
     featured: true,
   },
-  "monreseau-prdc": {
+  monreseau: {
+    description:
+      "Projet académique Django — réseau social : comptes, amis, groupes, publications, messagerie (déployé sur Render).",
     liveUrl: "https://monreseau-prdc.onrender.com",
+    hats: ["dev"],
     featured: true,
+  },
+  portfolio: {
+    description:
+      "Portfolio « Le Registre » — la carrière d'un archiviste 2.0 mise en page comme un fonds d'archives (Next.js, TypeScript, Vercel).",
+    liveUrl: "https://danielchabi.vercel.app",
+    hats: ["dev"],
   },
 };
 
